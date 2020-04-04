@@ -1,5 +1,12 @@
-# reading channel 0 example
+'''
 
+reading channel 0 example
+
+this script may be used from the command line:
+
+        "python example_graph.py"
+
+'''
 # 4. April 2020, ChrisMicro: initial version
 
 import scope
