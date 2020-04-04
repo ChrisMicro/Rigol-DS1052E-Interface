@@ -19,14 +19,18 @@ def showData():
   waveform_pnts_mode = "RAW"
   scp.query_scope(waveform_pnts_mode)
   
-  x=scp.time_axis[scope.SAMPLES]
+  x = scp.time_axis[scope.SAMPLES] * scp.time_per_division
 
   # channel index starts from 0
+  # Be sure that channel 0 is activated in the oscilloscope ( use buttons ) 
   channel=scp.active_channels[0]
   # get data
-  y=channel.volt_points
+  y = channel.volt_points * channel.volts_div
 
   plt.plot(x,y);
+  plt.title("Rigol DS1052E")
+  plt.xlabel("time [s]")
+  plt.ylabel("Voltage [V]")
   plt.grid();
   plt.show();
 
