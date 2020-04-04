@@ -50,7 +50,7 @@ class DS1000(object):
     def query_scope(self, _waveform_pnts_mode='NOR'):
         self._waveform_pnts_mode = _waveform_pnts_mode
         self._os_file = rigolusb.open_device_file(self._device_path)
-        rigolusb.set_stop(self._os_file)
+        #rigolusb.set_stop(self._os_file)
         self._retrieval_date = datetime.datetime.now()
         self._id = rigolusb.get_id(self._os_file)
         self._time_per_division = rigolusb.get_time_per_division(self._os_file)

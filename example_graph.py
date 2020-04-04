@@ -3,6 +3,8 @@
 # 4. April 2020, ChrisMicro: initial version
 
 import scope
+import numpy as np
+import matplotlib.pyplot as plt
 
 # the path depends on your PC
 device_path="/dev/usbtmc2"
@@ -21,10 +23,12 @@ def showData():
 
   # channel index starts from 0
   channel=scp.active_channels[0]
+  # get data
   y=channel.volt_points
-  print("time , data")
-  for n in range(0,10):
-    print(x[n],y[n])
+
+  plt.plot(x,y);
+  plt.grid();
+  plt.show();
 
 showData()
 
