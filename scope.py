@@ -47,6 +47,24 @@ class DS1000(object):
         for i in range(num_channels):
             self._channels.append(Channel(i+1))
 
+    def stop(self):
+        self._os_file = rigolusb.open_device_file(self._device_path)
+        rigolusb.set_stop(self._os_file)
+
+    def run(self):
+        self._os_file = rigolusb.open_device_file(self._device_path)
+        rigolusb.set_run(self._os_file)
+
+    def set_MemoryNormal(self): 
+        self._os_file = rigolusb.open_device_file(self._device_path)
+        rigolusb.set_MemoryDepth(self._os_file,0)
+
+    def set_MemoryLong(self): 
+        self._os_file = rigolusb.open_device_file(self._device_path)
+        rigolusb.set_MemoryDepth(self._os_file,1)
+
+
+ 
     def query_scope(self, _waveform_pnts_mode='NOR'):
         self._waveform_pnts_mode = _waveform_pnts_mode
         self._os_file = rigolusb.open_device_file(self._device_path)

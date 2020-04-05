@@ -65,6 +65,18 @@ def close_device_file(os_file):
 def set_stop(os_file):
     _send_command(os_file, ":STOP")
 
+# Run all acquisition
+def set_run(os_file):
+    _send_command(os_file, ":RUN")
+
+# set long memory depth, for DS1052 this is 524288 values for two channels
+# set normal memory depth, for DS1052 this is 8192 values for two channels in stop mode
+# normal=0, long=1
+def set_MemoryDepth(os_file,normalLong):
+  if normalLong==1:
+    _send_command(os_file, ":ACQ:MEMD LONG")
+  else:
+    _send_command(os_file, ":ACQ:MEMD NORM")
 
 # Switch from remote (rmt) control back to local control
 def set_local(os_file):
@@ -94,6 +106,7 @@ def get_channel_state(os_file, ch_num):
 # Get the channel data
 def get_points(os_file, waveform_pnts_mode, ch_num):
     _send_command(os_file, ":WAV:POIN:MODE " + waveform_pnts_mode)
+
     raw_data = _send_command(os_file, ":WAV:DATA? CHAN"
                              + str(ch_num), 1048586)  # 1048576 + 10 header
     points = np.frombuffer(raw_data, 'B')
